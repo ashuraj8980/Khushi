@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Meet | Premium Private Service</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+        .animate-text { display: inline-block; animation: marquee 20s linear infinite; }
+        .glass { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.3); }
+        .online-dot { height: 8px; width: 8px; background-color: #22c55e; border-radius: 50%; display: inline-block; box-shadow: 0 0 10px #22c55e; }
+        .premium-gradient { background: linear-gradient(135deg, #1a1a1a 0%, #2d3436 100%); }
+    </style>
+</head>
+<body class="bg-[#f8f9fa] font-sans text-gray-900">
+
+    <div class="bg-black py-1.5 overflow-hidden border-b border-pink-500/30">
+        <p class="animate-text whitespace-nowrap text-[10px] font-bold uppercase tracking-[0.2em] text-pink-500">
+            👑 Exclusive Membership Open | 100% Verified Profiles | Secret Codes: RM11 & RM22 | Live Video Calls Available 👑
+        </p>
+    </div>
+
+    <header class="glass sticky top-0 z-50 shadow-sm px-4 py-3">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="bg-pink-600 p-1.5 rounded-lg text-white">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h1 class="text-xl font-black tracking-tighter italic">REAL<span class="text-pink-600">MEET</span></h1>
+            </div>
+            
+            <div class="relative max-w-[150px] md:max-w-[200px]">
+                <input type="text" id="citySearch" onkeyup="searchCity()" placeholder="Find City..." 
+                class="w-full bg-gray-100 border-none rounded-full py-2 px-4 text-xs focus:ring-2 focus:ring-pink-500 transition-all outline-none">
+                <i class="fas fa-search absolute right-3 top-2.5 text-gray-400 text-[10px]"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="text-center py-8 bg-white">
+        <h2 class="text-2xl font-extrabold text-gray-800 tracking-tight">VIP Companion Directory</h2>
+        <div class="flex justify-center items-center mt-2 space-x-2">
+            <span class="h-[1px] w-8 bg-pink-300"></span>
+            <p class="text-[11px] text-pink-500 font-bold uppercase tracking-widest">Private & Confidential</p>
+            <span class="h-[1px] w-8 bg-pink-300"></span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-4 pb-20">
+        <div id="profileGrid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            </div>
+    </main>
+
+    <div id="bookingPopup" class="fixed bottom-24 left-4 right-4 md:right-auto md:w-80 glass shadow-2xl rounded-2xl p-4 flex items-center space-x-4 transform transition-all duration-700 translate-y-[200%] z-[60]">
+        <div class="relative flex-shrink-0">
+            <img id="popImg" src="" class="w-14 h-14 rounded-full object-cover border-2 border-pink-500">
+            <div class="absolute bottom-0 right-0 bg-green-500 w-4 h-4 rounded-full border-2 border-white"></div>
+        </div>
+        <div class="flex-1">
+            <p id="popText" class="text-xs leading-tight text-gray-700 font-medium"></p>
+            <p class="text-[10px] text-pink-600 font-bold mt-1 uppercase tracking-tighter animate-pulse">🔥 Someone is waiting...</p>
+        </div>
+    </div>
+
+    <a href="https://t.me/RealMeetSupport" class="fixed bottom-6 right-6 bg-[#0088cc] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-all z-50">
+        <i class="fab fa-telegram-plane text-2xl"></i>
+    </a>
+
+    <footer class="bg-gray-950 text-white pt-16 pb-8 px-4">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+                <h3 class="text-pink-500 font-bold text-xs uppercase tracking-[0.3em] mb-6">Recent Experiences</h3>
+                <div id="reviewContainer" class="h-24 relative overflow-hidden">
+                    </div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12 text-[10px] text-gray-500 font-bold uppercase tracking-widest text-center border-t border-white/5 pt-12">
+                <a href="#" class="hover:text-pink-500 transition">Privacy Policy</a>
+                <a href="#" class="hover:text-pink-500 transition">Terms of Use</a>
+                <a href="#" class="hover:text-pink-500 transition">Disclaimer</a>
+                <a href="#" class="hover:text-pink-500 transition">Contact Us</a>
+            </div>
+            
+            <div class="text-center">
+                <div class="inline-block px-4 py-1 border border-pink-500/20 rounded-full mb-4">
+                    <p class="text-[9px] text-pink-500/60 font-medium tracking-tighter">100% Encrypted & Anonymous Service</p>
+                </div>
+                <p class="text-[10px] text-gray-700 uppercase">© 2026 REAL MEET SERVICE | STRICTLY 18+</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const cities = ["Delhi", "Mumbai", "Bangalore", "Pune", "Hyderabad", "Kolkata", "Chennai", "Ahmedabad", "Jaipur", "Lucknow", "Chandigarh", "Indore", "Gurgaon", "Noida", "Surat", "Bhopal", "Patna", "Kanpur", "Nagpur", "Ludhiana"];
+        const names = ["Ishita", "Ananya", "Sana", "Kavya", "Priya", "Mehak", "Riya", "Zoya", "Myra", "Sneha", "Kaira", "Simran", "Tanya", "Nisha", "Aditi"];
+        
+        const naughtyMsgs = [
+            "is looking for a private date in",
+            "just accepted a video call from",
+            "is waiting for a secret meet in",
+            "just sent a private photo to a client in",
+            "is ready to meet right now in",
+            "wants to have a late night chat in"
+        ];
+
+        const fakeReviews = [
+            {n: "Vikram Rathore", c: "Delhi", r: "Service bohot fast hai, profile ekdum real thi. RM11 code worked!"},
+            {n: "Sameer Khanna", c: "Mumbai", r: "Best private service in Mumbai. Totally anonymous and safe."},
+            {n: "Rahul Verma", c: "Bangalore", r: "Payment ke 5 min baad hi connect ho gaya. Highly recommended."},
+            {n: "Arjun Singh", c: "Pune", r: "Premium profiles aur genuine behaviour. Loved the experience."},
+            {n: "Deepak Mehra", c: "Gurgaon", r: "Best call rates and high quality profiles. Totally satisfied."}
+        ];
+
+        function init() {
+            const grid = document.getElementById('profileGrid');
+            let profiles = [];
+            for (let i = 1; i <= 80; i++) {
+                profiles.push({
+                    id: i,
+                    name: names[Math.floor(Math.random() * names.length)],
+                    city: cities[Math.floor((i-1) / 4)],
+                    img: `pic${i}.jpg`,
+                    // Random rating between 4.2 and 4.9
+                    rating: (Math.random() * (4.9 - 4.2) + 4.2).toFixed(1)
+                });
+            }
+            profiles.sort(() => Math.random() - 0.5);
+
+            profiles.forEach(p => {
+                grid.innerHTML += `
+                    <div class="bg-white rounded-2xl p-1.5 shadow-sm hover:shadow-xl transition-all duration-300 profile-card border border-gray-50" data-city="${p.city.toLowerCase()}">
+                        <div class="relative overflow-hidden rounded-xl">
+                            <img src="${p.img}" class="w-full h-44 object-cover">
+                            <div class="absolute top-2 left-2 bg-black/60 backdrop-blur-md text-[8px] text-white px-2 py-0.5 rounded-full font-bold">
+                                <span class="online-dot mr-1"></span> LIVE
+                            </div>
+                        </div>
+                        <div class="mt-2 px-1 pb-2 text-center">
+                            <h3 class="font-bold text-xs text-gray-800">${p.name} <i class="fas fa-check-circle text-blue-500 text-[9px]"></i></h3>
+                            <p class="text-[9px] text-gray-400 font-bold uppercase tracking-wider mt-0.5">${p.city}</p>
+                            <div class="flex justify-center text-[9px] text-yellow-500 my-1.5">
+                                <i class="fas fa-star"></i> <span class="text-gray-900 font-bold ml-1">${p.rating}</span>
+                            </div>
+                            <button onclick="window.location.href='profile.html?id=${p.id}&name=${p.name}&city=${p.city}'" class="w-full bg-pink-600 text-white text-[10px] py-2 rounded-lg font-black uppercase hover:bg-black transition">Meet Now</button>
+                        </div>
+                    </div>
+                `;
+            });
+            renderReviews();
+        }
+
+        function renderReviews() {
+            const container = document.getElementById('reviewContainer');
+            fakeReviews.forEach((rev, idx) => {
+                container.innerHTML += `
+                    <div class="review-item absolute inset-0 flex flex-col items-center transition-opacity duration-1000 opacity-0" id="rev-${idx}">
+                        <p class="text-sm italic text-gray-400 max-w-sm">"${rev.r}"</p>
+                        <p class="text-pink-500 font-bold text-[10px] mt-2 uppercase tracking-widest">— ${rev.n}, ${rev.c}</p>
+                    </div>
+                `;
+            });
+            cycleReviews();
+        }
+
+        let currentRev = 0;
+        function cycleReviews() {
+            document.querySelectorAll('.review-item').forEach(el => el.style.opacity = 0);
+            document.getElementById(`rev-${currentRev}`).style.opacity = 1;
+            currentRev = (currentRev + 1) % fakeReviews.length;
+            setTimeout(cycleReviews, 5000);
+        }
+
+        function searchCity() {
+            let val = document.getElementById('citySearch').value.toLowerCase();
+            document.querySelectorAll('.profile-card').forEach(card => {
+                card.style.display = card.dataset.city.includes(val) ? "block" : "none";
+            });
+        }
+
+        // Naughty Booking Popups
+        setInterval(() => {
+            const pop = document.getElementById('bookingPopup');
+            const randomImg = Math.floor(Math.random() * 80) + 1;
+            const randomName = names[Math.floor(Math.random() * names.length)];
+            const randomCity = cities[Math.floor(Math.random() * cities.length)];
+            const randomMsg = naughtyMsgs[Math.floor(Math.random() * naughtyMsgs.length)];
+
+            document.getElementById('popImg').src = `pic${randomImg}.jpg`;
+            document.getElementById('popText').innerHTML = `<b>${randomName}</b> ${randomMsg} <b>${randomCity}</b>`;
+            
+            pop.classList.remove('translate-y-[200%]');
+            setTimeout(() => pop.classList.add('translate-y-[200%]'), 5000);
+        }, 8000);
+
+        window.onload = init;
+    </script>
+</body>
+</html>

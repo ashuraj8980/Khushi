@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Details | Real Meet Service</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .premium-card { background: white; border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .btn-whatsapp { background: linear-gradient(90deg, #25D366 0%, #128C7E 100%); }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+
+    <header class="bg-white shadow-sm px-4 py-4 sticky top-0 z-50">
+        <div class="container mx-auto flex items-center">
+            <button onclick="history.back()" class="text-gray-600 mr-4"><i class="fas fa-arrow-left text-lg"></i></button>
+            <h1 class="text-xl font-black italic">REAL<span class="text-pink-600">MEET</span></h1>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-6 max-w-lg">
+        <div class="premium-card overflow-hidden mb-6">
+            <img id="profileImg" src="" class="w-full h-80 object-cover">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-2">
+                    <h2 id="profileName" class="text-2xl font-bold text-gray-800"></h2>
+                    <span class="bg-green-100 text-green-600 text-[10px] font-bold px-3 py-1 rounded-full uppercase">Available Now</span>
+                </div>
+                <p class="text-gray-500 text-sm flex items-center">
+                    <i class="fas fa-map-marker-alt text-pink-500 mr-2"></i> <span id="profileCity"></span>
+                </p>
+                <div class="flex text-yellow-400 text-xs mt-3 space-x-1">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    <span class="text-gray-400 ml-2 font-bold">(4.9/5 Based on 120+ Meets)</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="premium-card p-6 mb-6">
+            <h3 class="text-lg font-bold text-gray-800 mb-3 border-b pb-2">About Her</h3>
+            <p class="text-gray-600 text-sm leading-relaxed italic">
+                "Hi, I am <span class="name-span font-bold"></span>. I am a fun-loving, open-minded, and high-profile companion. I believe in making every moment special and memorable. Whether it's a quiet dinner or a private late-night conversation, I am here to provide you with the best experience and 100% privacy."
+            </p>
+            <ul class="mt-4 grid grid-cols-2 gap-3">
+                <li class="text-[11px] font-bold text-gray-500"><i class="fas fa-check text-green-500 mr-2"></i> Verified Profile</li>
+                <li class="text-[11px] font-bold text-gray-500"><i class="fas fa-check text-green-500 mr-2"></i> 100% Confidential</li>
+                <li class="text-[11px] font-bold text-gray-500"><i class="fas fa-check text-green-500 mr-2"></i> Personal WhatsApp</li>
+                <li class="text-[11px] font-bold text-gray-500"><i class="fas fa-check text-green-500 mr-2"></i> In-Person Meeting</li>
+            </ul>
+        </div>
+
+        <div class="bg-pink-50 border border-pink-100 rounded-2xl p-4 mb-6">
+            <h4 class="text-pink-600 font-bold text-sm mb-2"><i class="fab fa-whatsapp mr-2"></i> WhatsApp Connect Benefits:</h4>
+            <ul class="text-[11px] text-gray-700 space-y-1">
+                <li>• Get her direct personal WhatsApp number.</li>
+                <li>• Instant chat and video call verification.</li>
+                <li>• Share location and finalize meeting time.</li>
+                <li>• 24/7 Priority Support.</li>
+            </ul>
+        </div>
+
+        <div class="premium-card p-6 border-2 border-pink-500">
+            <h3 class="text-center font-black text-gray-800 uppercase tracking-tight mb-4">Connect on WhatsApp</h3>
+            <form id="leadForm" onsubmit="handleForm(event)" class="space-y-4">
+                <div>
+                    <label class="text-[10px] font-bold text-gray-400 uppercase ml-1">Your Full Name</label>
+                    <input type="text" id="clientName" required placeholder="Enter your name" class="w-full bg-gray-50 border-none rounded-xl py-3 px-4 text-sm focus:ring-2 focus:ring-pink-500 outline-none">
+                </div>
+                <div>
+                    <label class="text-[10px] font-bold text-gray-400 uppercase ml-1">Mobile Number</label>
+                    <input type="tel" id="clientPhone" required placeholder="+91 XXXX XXX XXX" class="w-full bg-gray-50 border-none rounded-xl py-3 px-4 text-sm focus:ring-2 focus:ring-pink-500 outline-none">
+                </div>
+                <div>
+                    <label class="text-[10px] font-bold text-gray-400 uppercase ml-1">Meeting City</label>
+                    <input type="text" id="clientCity" required placeholder="Enter your city" class="w-full bg-gray-50 border-none rounded-xl py-3 px-4 text-sm focus:ring-2 focus:ring-pink-500 outline-none">
+                </div>
+
+                <button type="submit" class="w-full btn-whatsapp text-white font-black py-4 rounded-xl shadow-lg hover:opacity-90 transition-all flex justify-center items-center space-x-2">
+                    <i class="fab fa-whatsapp text-xl"></i>
+                    <span>PAY & CONNECT ON WHATSAPP</span>
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <footer class="bg-white border-t mt-10 py-6 text-center">
+        <p class="text-[10px] text-gray-400 uppercase font-bold tracking-widest">Privacy Secured | Real Meet Service</p>
+    </footer>
+
+    <script>
+        // Get details from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get('id');
+        const name = urlParams.get('name');
+        const city = urlParams.get('city');
+
+        // Set Profile Details
+        document.getElementById('profileImg').src = `pic${id}.jpg`;
+        document.getElementById('profileName').innerText = name;
+        document.getElementById('profileCity').innerText = city;
+        document.querySelectorAll('.name-span').forEach(el => el.innerText = name);
+
+        function handleForm(e) {
+            e.preventDefault();
+            
+            // Save client data in localStorage to show on payment page
+            const clientData = {
+                name: document.getElementById('clientName').value,
+                phone: document.getElementById('clientPhone').value,
+                city: document.getElementById('clientCity').value,
+                targetProfile: name,
+                targetId: id
+            };
+            localStorage.setItem('tempClient', JSON.stringify(clientData));
+
+            // Redirect to Payment Page
+            window.location.href = 'payment.html';
+        }
+    </script>
+</body>
+</html>

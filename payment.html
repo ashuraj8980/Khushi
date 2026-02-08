@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Checkout | Real Meet Premium</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .glass { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); }
+        .payment-card { border-radius: 30px; background: #ffffff; box-shadow: 0 20px 50px rgba(0,0,0,0.1); }
+        .step-circle { width: 24px; height: 24px; background: #db2777; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; }
+        @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+        .animate-text { display: inline-block; animation: marquee 20s linear infinite; }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans text-gray-900">
+
+    <div class="bg-black py-2 overflow-hidden">
+        <p class="animate-text whitespace-nowrap text-[10px] font-bold uppercase tracking-widest text-white">
+             🔒 SSL ENCRYPTED CONNECTION | SECURE PAYMENT GATEWAY | 100% ANONYMOUS BILLING 🔒
+        </p>
+    </div>
+
+    <header class="bg-white py-4 px-6 shadow-sm flex justify-between items-center">
+        <h1 class="text-xl font-black italic">REAL<span class="text-pink-600">MEET</span></h1>
+        <div class="flex items-center space-x-2 text-green-600">
+            <i class="fas fa-lock text-xs"></i>
+            <span class="text-[10px] font-bold uppercase tracking-tighter">Secure Checkout</span>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8 max-w-lg">
+        
+        <div class="mb-6 bg-pink-600 p-4 rounded-2xl text-white shadow-lg">
+            <p class="text-xs opacity-80 uppercase font-bold tracking-wider">Booking Confirmation</p>
+            <h2 class="text-lg font-bold">Hello, <span id="userNameDisplay">Guest</span></h2>
+            <p class="text-[11px]">Your request for <span id="targetGirl" class="underline">Premium Profile</span> is being processed.</p>
+        </div>
+
+        <div class="payment-card p-6 border border-gray-100">
+            <div class="text-center mb-8">
+                <p class="text-gray-400 text-[10px] uppercase font-bold tracking-widest mb-1">Total Amount Payable</p>
+                <h3 class="text-5xl font-black text-gray-900 tracking-tighter">₹499</h3>
+                <p class="text-green-500 text-[10px] font-bold mt-2"><i class="fas fa-check-circle"></i> INCLUSIVE OF ALL TAXES</p>
+            </div>
+
+            <div class="space-y-6 mb-8">
+                <div class="flex items-start space-x-4">
+                    <div class="step-circle flex-shrink-0">1</div>
+                    <p class="text-xs text-gray-600"><b>Scan & Pay:</b> Scan the QR code below using any UPI App (GPay, PhonePe, Paytm).</p>
+                </div>
+                
+                <div class="flex justify-center py-4">
+                    <div class="p-3 border-4 border-pink-500 rounded-[2rem] bg-white shadow-xl">
+                        <img src="qrcode.jpg" alt="Scan to Pay" class="w-52 h-52 rounded-2xl">
+                    </div>
+                </div>
+
+                <div class="flex items-start space-x-4">
+                    <div class="step-circle flex-shrink-0">2</div>
+                    <p class="text-xs text-gray-600"><b>Take Screenshot:</b> After successful payment, take a screenshot of the transaction.</p>
+                </div>
+
+                <div class="flex items-start space-x-4">
+                    <div class="step-circle flex-shrink-0">3</div>
+                    <p class="text-xs text-gray-600"><b>Get Secret Code:</b> Share the screenshot on WhatsApp. The coordinator will provide your <b>Secret Meeting Code</b>.</p>
+                </div>
+            </div>
+
+            <div class="space-y-3">
+                <a href="upi://pay?pa=your-upi-id@okicici&pn=RealMeet&am=499&cu=INR" class="flex items-center justify-center space-x-2 w-full bg-blue-600 text-white py-4 rounded-2xl font-black text-sm shadow-lg hover:bg-blue-700 transition">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>OPEN UPI APP TO PAY</span>
+                </a>
+                
+                <button onclick="contactCoordinator()" class="w-full bg-black text-white py-4 rounded-2xl font-black text-sm shadow-lg flex items-center justify-center space-x-2">
+                    <i class="fab fa-whatsapp text-lg"></i>
+                    <span>I HAVE PAID - SEND SCREENSHOT</span>
+                </button>
+            </div>
+
+            <div class="mt-10 pt-6 border-t border-gray-100">
+                <p class="text-[10px] text-gray-400 font-bold uppercase text-center mb-4 italic">Already have a Secret Code?</p>
+                <div class="flex gap-2">
+                    <input type="text" id="secretCode" placeholder="Enter RM11 / RM22" class="flex-1 bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-pink-500 outline-none uppercase font-bold">
+                    <button onclick="handleSecretRedirect()" class="bg-pink-600 text-white px-6 rounded-xl font-bold text-xs uppercase tracking-widest">Connect</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-8 flex justify-center items-center space-x-6 opacity-40 grayscale">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" class="h-4">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/UPI-Logo-vector.svg" class="h-4">
+            <i class="fas fa-user-shield text-2xl"></i>
+        </div>
+    </main>
+
+    <div id="bookingPopup" class="fixed bottom-10 left-4 right-4 md:right-auto md:w-80 glass shadow-2xl rounded-2xl p-4 flex items-center space-x-4 transform transition-all duration-700 translate-y-[200%] z-[60]">
+        <img id="popImg" src="" class="w-12 h-12 rounded-full object-cover border-2 border-pink-500">
+        <div>
+            <p id="popText" class="text-[11px] leading-tight text-gray-700 font-medium"></p>
+            <p class="text-[9px] text-pink-600 font-bold mt-1 uppercase animate-pulse">❤️ Booking Success!</p>
+        </div>
+    </div>
+
+    <script>
+        const names = ["Ishita", "Ananya", "Sana", "Kavya", "Priya", "Mehak", "Riya", "Zoya"];
+        const cities = ["Delhi", "Mumbai", "Bangalore", "Pune", "Hyderabad", "Kolkata"];
+        const naughtyMsgs = ["is online and waiting in", "just shared her number in", "is ready for a private meet in"];
+
+        window.onload = function() {
+            const data = JSON.parse(localStorage.getItem('tempClient'));
+            if(data) {
+                document.getElementById('userNameDisplay').innerText = data.name;
+                document.getElementById('targetGirl').innerText = data.targetProfile;
+            }
+            initNotifications();
+        }
+
+        function contactCoordinator() {
+            const data = JSON.parse(localStorage.getItem('tempClient')) || {name: 'Client', city: 'Unknown', targetProfile: 'Girl'};
+            const msg = `Hello, I have made the payment of ₹499. My Name: ${data.name}, City: ${data.city}. Please verify my screenshot and give me the Secret Code for ${data.targetProfile}.`;
+            window.location.href = `https://wa.me/919354185036?text=${encodeURIComponent(msg)}`;
+        }
+
+        function handleSecretRedirect() {
+            const code = document.getElementById('secretCode').value.trim().toUpperCase();
+            const data = JSON.parse(localStorage.getItem('tempClient')) || {name: 'Client', targetProfile: 'Girl'};
+            const msg = `CODE VERIFIED: I am connecting with ${data.targetProfile}. My Name: ${data.name}. Code: ${code}`;
+            
+            if(code === "RM11") {
+                window.location.href = `https://wa.me/919354185036?text=${encodeURIComponent(msg)}`;
+            } else if(code === "RM22") {
+                window.location.href = `https://wa.me/917678125700?text=${encodeURIComponent(msg)}`;
+            } else {
+                alert("Invalid Code! Please pay and get the code from the coordinator.");
+            }
+        }
+
+        function initNotifications() {
+            setInterval(() => {
+                const pop = document.getElementById('bookingPopup');
+                const randomImg = Math.floor(Math.random() * 80) + 1;
+                document.getElementById('popImg').src = `pic${randomImg}.jpg`;
+                document.getElementById('popText').innerHTML = `<b>${names[Math.floor(Math.random()*8)]}</b> ${naughtyMsgs[Math.floor(Math.random()*3)]} <b>${cities[Math.floor(Math.random()*6)]}</b>`;
+                pop.classList.remove('translate-y-[200%]');
+                setTimeout(() => pop.classList.add('translate-y-[200%]'), 4500);
+            }, 8000);
+        }
+    </script>
+</body>
+</html>
